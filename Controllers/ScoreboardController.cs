@@ -14,10 +14,11 @@ public class ScoreboardController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetScoreboard")]
-    public Scoreboard Get()
+    [HttpGet]
+    [Route("Scoreboard")]
+    public IEnumerable<ScoreEntry> Get()
     {
         DBScoreboard.AccessScoreboard db = new();
-        return db.GetScoreBoard();//test scoreboard
+        return db.GetScoreBoard().ToArray(); //test scoreboard
     }
 }

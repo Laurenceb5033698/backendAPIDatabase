@@ -8,10 +8,10 @@ public class AccessScoreboard
     const string PATH = "../database/";
     const string FILE = "Scoreboard.db";
     
-    public Scoreboard GetScoreBoard()
+    public IEnumerable<ScoreEntry> GetScoreBoard()
     {
-        Scoreboard board = new();
-        Query(ref board.Board);
+        List<ScoreEntry> board = new();
+        Query(ref board);
         return board;
     }
     private void Query(ref List<ScoreEntry> data )
@@ -19,7 +19,7 @@ public class AccessScoreboard
         SqliteConnection con = new SqliteConnection($"Data Source={PATH + FILE}");
         con.Open();
         SqliteCommand com = con.CreateCommand();
-        com.CommandText = "SELECT * FROM TestData ORDERBY Score LIMIT 20";
+        com.CommandText = "SELECT * FROM TestData ORDER BY score DESC LIMIT 20";
         using (SqliteDataReader reader = com.ExecuteReader())
         {
             while (reader.Read())

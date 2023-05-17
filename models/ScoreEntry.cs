@@ -3,8 +3,8 @@ namespace DBScoreboard;
 public class ScoreEntry
 {
     //a single entry with name and score value
-    string name;
-    int score;
+    public string name {get;set;}
+    public int score {get;set;}
     
     public ScoreEntry(string _name, int _value)
     {
