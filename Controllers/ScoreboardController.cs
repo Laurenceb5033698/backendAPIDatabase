@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using DBScoreboard;
 
 namespace backendAPIDatabase.Controllers;
@@ -15,6 +16,7 @@ public class ScoreboardController : ControllerBase
     }
 
     [HttpGet]
+    [EnableCors("_myDemoFrontend")]
     [Route("Scoreboard")]
     public IEnumerable<ScoreEntry> Get()
     {

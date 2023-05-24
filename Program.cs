@@ -1,6 +1,18 @@
+var demoFrontend = "_myDemoFrontend";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: demoFrontend,
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:5026");
+    });
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,6 +29,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//enable CORS
+app.UseCors();
 
 app.UseAuthorization();
 
