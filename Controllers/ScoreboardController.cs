@@ -23,4 +23,14 @@ public class ScoreboardController : ControllerBase
         DBScoreboard.AccessScoreboard db = new();
         return db.GetScoreBoard().ToArray(); //test scoreboard
     }
+
+    [HttpPost]
+    [EnableCors("_myDemoFrontend")]
+    [Route("TestPostScore")]
+    public async Task<ActionResult<ScoreEntry>> Post(ScoreEntry userEntry)
+    {
+        DBScoreboard.AccessScoreboard db = new();
+        db.PostScore(userEntry.name??string.Empty, userEntry.score);
+        return Ok(userEntry);
+    }
 }
